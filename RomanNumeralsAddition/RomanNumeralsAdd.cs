@@ -52,6 +52,40 @@ namespace RomanNumeralsAddition
             return intSum1;
         }
 
+        //function to convert the total sum to Roman Numerals sum
+        public static string ConvertSumToRomanNumerals(Int32 intSum)
+        {
+            //stores possible Roman numeral combinations
+            Hashtable hashPossibleValues = new Hashtable();
+            hashPossibleValues.Add(1000, "M");
+            hashPossibleValues.Add(900, "CM");
+            hashPossibleValues.Add(500, "D");
+            hashPossibleValues.Add(400, "CD");
+            hashPossibleValues.Add(100, "C");
+            hashPossibleValues.Add(90, "XC");
+            hashPossibleValues.Add(50, "L");
+            hashPossibleValues.Add(40, "XL");
+            hashPossibleValues.Add(10, "X");
+            hashPossibleValues.Add(9, "IX");
+            hashPossibleValues.Add(5, "V");
+            hashPossibleValues.Add(4, "IV");
+            hashPossibleValues.Add(1, "I");
+
+            var arr = new Int32[13] { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+            var strRomanSum = "";
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                while (arr[i] <= intSum)
+                {
+                    intSum = intSum - arr[i];
+                    strRomanSum += hashPossibleValues[arr[i]].ToString();
+                }
+            }
+
+            return strRomanSum;
+        }
+
         public static bool IsRomanNumeralValid(string str)
         {
             //hashtable storing roman numerals and their corresponding values
@@ -88,17 +122,39 @@ namespace RomanNumeralsAddition
 
         }
 
+        public static string Solution(string strRoman1, string strRoman2)
+        {
+            var sum = 0;
+            var strRomanSum = "";
+
+            //only if both strings are valid, continue with the program
+            if (IsRomanNumeralValid(strRoman1) && IsRomanNumeralValid(strRoman2))
+            {
+                sum = ConvertRomanNumeralToNumber(strRoman1) + ConvertRomanNumeralToNumber(strRoman2);
+                strRomanSum = ConvertSumToRomanNumerals(sum);
+                return strRomanSum;
+            }
+            else
+            {
+                return "invalid";
+            }
+        }
+
         static void Main(string[] args)
         {
             var strRoman1 = "LX";
             var strRoman2 = "DCCL";
 
-            if (IsRomanNumeralValid(strRoman1) && IsRomanNumeralValid(strRoman2))
-            {
-                int answer = ConvertRomanNumeralToNumber(strRoman1) + ConvertRomanNumeralToNumber(strRoman2);
+            var answer = Solution(strRoman1, strRoman2);
 
+            if (answer != "invalid")
+            {
                 Console.WriteLine("The sum of Roman numerals (" + strRoman1 + ") and (" + strRoman2 + ") is : " + answer);
                 Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
             }
         }
     }
