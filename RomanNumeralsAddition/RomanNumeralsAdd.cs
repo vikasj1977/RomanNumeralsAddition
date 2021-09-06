@@ -52,15 +52,54 @@ namespace RomanNumeralsAddition
             return intSum1;
         }
 
+        public static bool IsRomanNumeralValid(string str)
+        {
+            //hashtable storing roman numerals and their corresponding values
+            Hashtable hashRoman = new Hashtable();
+            hashRoman.Add("I", 1);
+            hashRoman.Add("V", 5);
+            hashRoman.Add("X", 10);
+            hashRoman.Add("L", 50);
+            hashRoman.Add("C", 100);
+            hashRoman.Add("D", 500);
+            hashRoman.Add("M", 1000);
+
+            //checking if input string is null (empty)
+            if (str.Length == 0)
+            {
+                Console.WriteLine("Invalid input, one or both of the Roman numerals strings was empty.");
+                Console.ReadLine();
+                return false;
+            }
+
+            //checking if input string only contains Roman numeral characters
+            foreach (char letter in str)
+            {
+                if (!hashRoman.Contains(letter.ToString()))
+                {
+                    Console.WriteLine("Invalid input, one or both of the string had an invalid Roman numeral.");
+                    Console.ReadLine();
+                    return false;
+                }
+            }
+
+            //if string passes both the above tests, then string is valid and we can return true
+            return true;
+
+        }
+
         static void Main(string[] args)
         {
             var strRoman1 = "LX";
             var strRoman2 = "DCCL";
 
-            int answer = ConvertRomanNumeralToNumber(strRoman1) + ConvertRomanNumeralToNumber(strRoman2);
+            if (IsRomanNumeralValid(strRoman1) && IsRomanNumeralValid(strRoman2))
+            {
+                int answer = ConvertRomanNumeralToNumber(strRoman1) + ConvertRomanNumeralToNumber(strRoman2);
 
-            Console.WriteLine("The sum of Roman numerals (" + strRoman1 + ") and (" + strRoman2 + ") is : " + answer);
-            Console.ReadLine();
+                Console.WriteLine("The sum of Roman numerals (" + strRoman1 + ") and (" + strRoman2 + ") is : " + answer);
+                Console.ReadLine();
+            }
         }
     }
 }
