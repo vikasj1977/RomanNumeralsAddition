@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace RomanNumeralsAddition
 {
-    class RomanNumeralsAdd
+    public class RomanNumeralsAdd
     {
         //Thought Process
         //add the Roman numerals with their corresponding values to a hash table
