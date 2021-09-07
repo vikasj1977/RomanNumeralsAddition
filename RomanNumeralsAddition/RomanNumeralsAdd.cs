@@ -101,8 +101,8 @@ namespace RomanNumeralsAddition
             //checking if input string is null (empty)
             if (str.Length == 0)
             {
-                Console.WriteLine("Invalid input, one or both of the Roman numerals strings was empty.");
-                Console.ReadLine();
+                //Console.WriteLine("Invalid input, one or both of the Roman numerals strings was empty.");
+                //Console.ReadLine();
                 return false;
             }
 
@@ -111,8 +111,8 @@ namespace RomanNumeralsAddition
             {
                 if (!hashRoman.Contains(letter.ToString()))
                 {
-                    Console.WriteLine("Invalid input, one or both of the string had an invalid Roman numeral.");
-                    Console.ReadLine();
+                    //Console.WriteLine("Invalid input, one or both of the string had an invalid Roman numeral.");
+                    //Console.ReadLine();
                     return false;
                 }
             }
